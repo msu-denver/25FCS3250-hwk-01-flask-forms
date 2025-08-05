@@ -1,28 +1,35 @@
 # Overview
 
-In class you were introduced to Flask, a lightweight framework for building web apps in Python. Flask documentation can be found [here](https://flask.palletsprojects.com/en/3.0.x/). In this homework assignment you are asked to incorporate templates and web forms processing to a simple web app. 
+In class, you were introduced to Flask, a lightweight framework for building web applications in Python. You can find the official Flask documentation [here](https://flask.palletsprojects.com/en/stable/). In this homework assignment, you’ll enhance a simple web app by incorporating templates and web form processing.
 
-# Goal 
+The web app you’ll create consists of just two pages:
 
-The web app you are asked to create is very simple. It constitutes of only 2 pages. The first one shows the list of recipes below: 
+A page displaying a list of recipes:
 
-![pic1.png](pics/pic1.png)
+![pics/pic1.png](pics/pic1.png)
 
-Users can then create new recipes using a simple form. 
+A page where users can create new recipes using a simple form:
 
-![pic2.png](pics/pic2.png)
+![pics/pic2.png](pics/pic2.png)
 
-The information entered updates the list of recipes. 
+Once submitted, the new recipe is added to the list:
 
-![pic3.png](pics/pic3.png)
+![pics/pic3.png](pics/pic3.png)
 
 # Setup
 
-Begin by creating a virtual environment under ".venv".  Then install **flask** and **flask-wtf**. Set FLASK_APP environment variable to **src/app** (from the project's folder).  
+Start by creating a virtual environment named **.venv.** Then, install the required packages:
+
+```
+flask
+flask-wtf
+```
+
+Set the **FLASK_APP** environment variable to **src/app** from the project’s root directory.
 
 # Templates
 
-Templates allows the separation of HTML and Python code. For example, the following template can be used to render the contents of **title** and **user** into the HTML code. 
+Templates allow you to separate HTML from Python logic. For example, the following template renders the values of title and user:
 
 ```
 <!DOCTYPE html>
@@ -36,7 +43,7 @@ Templates allows the separation of HTML and Python code. For example, the follow
 </html>
 ```
 
-You can use the **render_template** function to display the web content above with specific values for **title** and **user**. 
+Use the **render_template** function to pass values to the template:
 
 ```
 from app import app
@@ -48,7 +55,7 @@ def index():
     return render_template("index.html", title="CS 3250", user="Thyago")
 ```
 
-Templates can use conditional statements, as shown by the example below. 
+Templates also support conditional statements:
 
 ```
 <!DOCTYPE html>
@@ -66,7 +73,7 @@ Templates can use conditional statements, as shown by the example below.
 </html>
 ```
 
-The example below shows how loops can be incorporated in templates as well.
+And loops:
 
 ```
 <!DOCTYPE html>
@@ -88,7 +95,7 @@ The example below shows how loops can be incorporated in templates as well.
 </html>
 ```
 
-To display the web content above with specific values for **title**, **user**, and **classes** you would do: 
+To render this with values:
 
 ```
 from app import app
@@ -100,7 +107,7 @@ def index():
     return render_template("index.html", title="CS 3250", user="Thyago", classes=['CS2050', 'CS3250'])
 ```
 
-Templates can be easily extended using the following syntax: 
+Templates can also extend other templates using:
 
 ```
 {% extends "parent.html" %}
@@ -108,13 +115,13 @@ Templates can be easily extended using the following syntax:
 
 # Forms
 
-Forms provide a way for users to communicate values to a web app. Support of web forms can be incorporated to Flask using an extension called Flask-WTF.  Flask extensions are Python packages that help you accomplish common tasks. Flask-WTF can be installed using: 
+Forms allow users to submit data to your web app. Flask-WTF is a Flask extension that simplifies form handling. Install it with:
 
 ```
 pip3 install flask-wtf
 ```
 
-Below is an example of a web form with a text field and a submit button. 
+Here’s an example of a form with a text field and a submit button:
 
 ```
 from flask_wtf import FlaskForm
@@ -126,48 +133,48 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
 ```
 
-There are many types of fields that can be used: IntegerField, StringField, DateField, SelectField, SubmitField, etc. Read Flask-WTF [documentation](https://flask-wtf.readthedocs.io/en/1.2.x/) to learn more about them. 
+Flask-WTF supports various field types: **IntegerField**, **StringField**, **DateField**, **SelectField**, **SubmitField**, and more. Refer to the Flask-WTF documentation for details.
 
-# TO-DOs
+# Instructions 
 
 ## TO-DO #1
 
-In **index.html**, using a for loop, render the recipes information using parameter "recipes". You are also expected to use a conditional statement to control the background of the table row. For example, if the variable **loop.index** is even, set the class attribute value to **even_row** and to **odd_row** otherwise. Those classes are defined in **static/style.css**. 
+In [templates/index.html](templates/index.html), use a for loop to render the recipe list using the recipes parameter. Add a conditional to alternate row styles:
 
-## TO-DO #2 
+* Use the class **even_row** if **loop.index** is even.
+* Use **odd_row** otherwise.
 
-In **forms.py**, complete the recipe form with the missing fields (title, type, and tags). Fields title and type should be required. Also, make sure to use appropriate data types for the fields. For example, type should be of **SelectField** data type, with the options: 'breakfast', 'appetizer', 'side dish', 'main course', 'dessert'. 
+These classes are defined in [static/style.css](static/style.css).
+
+## TO-DO #2
+
+In [src/app/forms.py](src/app/forms.py), complete the recipe form by adding the missing fields: **title**, **type**, and **tags**.
+
+**title** and **type** should be required fields. 
+
+Use appropriate field types. For example, **type** should be a **SelectField** with options: 'breakfast', 'appetizer', 'side dish', 'main course', and 'dessert'. 
 
 ## TO-DO #3
 
-In **routes.py**, complete the "append" line with the missing fields that you are getting from the **form** object. 
+In [src/app/routes.py](src/app/routes.py), complete the line that appends a new recipe by including the missing fields from the form object.
 
-## TO-DO #4 
+## TO-DO #4
 
-In **recipes_create.html**, complete the form rendering with the missing fields. 
+In [templates/recipes_create.html](templates/recipes_create.html), complete the form rendering by adding the missing fields.
 
-# Submission 
+# Submission
 
-Once you are done completing all to-do's, submit all code changed using "final submission" as the commit message. 
+Once all TO-DOs are completed, submit your changes with the commit message:
+"final submission". 
 
-# Rubric 
+# Rubric
 
-This homework is worth 5 points distributed in the following way: 
+This assignment is worth 5 points, distributed as follows:
 
-+1 TO-DO #1 for loop 
-
-+1 TO-DO #1 if statement 
-
-+1 TO-DO #2
-
-+1 TO-DO #3
-
-+1 TO-DO #4
-
-
-
-
-
-
-
-
+```
++1 TO-DO #1: for loop implementation
++1 TO-DO #1: conditional statement for row styling
++1 TO-DO #2: form field completion
++1 TO-DO #3: route logic completion
++1 TO-DO #4: form rendering in HTML
+```
